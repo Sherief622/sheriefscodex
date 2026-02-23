@@ -1,26 +1,26 @@
 # ⟨/⟩ Sherief's Dev Codex
 
-A modern, dark-mode portfolio website for showcasing software engineering projects. Built with React, TypeScript, and Supabase — featuring an on-site admin interface for managing projects with rich content blocks.
+A modern, dark mode portfolio website for showcasing software engineering projects. Built with React, TypeScript, and Supabase, featuring an on site admin interface for managing projects with rich content blocks.
 
 ## Features
 
 ### Public Pages
 
 - **Landing Page** — Hero section with animated orbs and featured project showcase
-- **Projects Gallery** — Filterable grid with search and tag-based filtering
-- **Project Detail** — Rich content rendering with syntax-highlighted code blocks, images, text, and headings
+- **Projects Gallery** — Filterable grid with search and tag based filtering
+- **Project Detail** — Rich content rendering with syntax highlighted code blocks, images, text, and headings
 - **About Page** — Skills grid, bio, and contact links
 
 ### Admin Interface (`/admin`)
 
 - **Secure Login** — Email + password authentication via Supabase Auth
 - **Project Dashboard** — View, edit, and delete projects
-- **Project Editor** — WYSIWYG-style block editor with:
+- **Project Editor** — WYSIWYG style block editor with:
   - Text blocks (Markdown support)
   - Code blocks (17 languages, syntax highlighting, line numbers)
   - Image blocks (uploaded to Supabase Storage)
   - Heading blocks (H2/H3)
-  - Drag-to-reorder, live preview mode
+  - Drag to reorder, live preview mode
 
 ### Technical Highlights
 
@@ -29,7 +29,7 @@ A modern, dark-mode portfolio website for showcasing software engineering projec
 - **Supabase Storage** — Persistent image hosting with public URLs
 - **Universal Persistence** — Projects and images visible to all visitors across all browsers
 - **Vite** — Fast dev server with HMR and optimized production builds
-- **Dark-mode Glassmorphism** — Custom CSS design system with smooth animations
+- **Dark mode Glassmorphism** — Custom CSS design system with smooth animations
 
 ## 🛠️ Tech Stack
 
@@ -46,7 +46,7 @@ A modern, dark-mode portfolio website for showcasing software engineering projec
 | **Markdown**          | react-markdown                     |
 | **Hosting**           | Vercel                             |
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -121,7 +121,7 @@ A modern, dark-mode portfolio website for showcasing software engineering projec
    npm run dev
    ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
