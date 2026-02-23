@@ -1,73 +1,153 @@
-# React + TypeScript + Vite
+# ⟨/⟩ Sherief's Dev Codex
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, dark-mode portfolio website for showcasing software engineering projects. Built with React, TypeScript, and Supabase — featuring an on-site admin interface for managing projects with rich content blocks.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Public Pages
 
-## React Compiler
+- **Landing Page** — Hero section with animated orbs and featured project showcase
+- **Projects Gallery** — Filterable grid with search and tag-based filtering
+- **Project Detail** — Rich content rendering with syntax-highlighted code blocks, images, text, and headings
+- **About Page** — Skills grid, bio, and contact links
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Admin Interface (`/admin`)
 
-## Expanding the ESLint configuration
+- **Secure Login** — Email + password authentication via Supabase Auth
+- **Project Dashboard** — View, edit, and delete projects
+- **Project Editor** — WYSIWYG-style block editor with:
+  - Text blocks (Markdown support)
+  - Code blocks (17 languages, syntax highlighting, line numbers)
+  - Image blocks (uploaded to Supabase Storage)
+  - Heading blocks (H2/H3)
+  - Drag-to-reorder, live preview mode
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Technical Highlights
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- 🔐 **Supabase Auth** — Secure admin authentication with Row Level Security
+- 🗄️ **Supabase Database** — PostgreSQL with public read / authenticated write policies
+- 🖼️ **Supabase Storage** — Persistent image hosting with public URLs
+- 🌐 **Universal Persistence** — Projects and images visible to all visitors across all browsers
+- ⚡ **Vite** — Fast dev server with HMR and optimized production builds
+- 🎨 **Dark-mode Glassmorphism** — Custom CSS design system with smooth animations
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠️ Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Layer                 | Technology                         |
+| --------------------- | ---------------------------------- |
+| **Framework**         | React 19 + TypeScript              |
+| **Build Tool**        | Vite 7                             |
+| **Routing**           | React Router v7                    |
+| **Database**          | Supabase (PostgreSQL)              |
+| **Auth**              | Supabase Auth                      |
+| **Image Storage**     | Supabase Storage                   |
+| **Styling**           | Vanilla CSS (custom design system) |
+| **Code Highlighting** | react-syntax-highlighter (Prism)   |
+| **Markdown**          | react-markdown                     |
+| **Hosting**           | Vercel                             |
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- A [Supabase](https://supabase.com) project
+
+### Setup
+
+1. **Clone the repo**
+
+   ```bash
+   git clone https://github.com/Sherief622/sheriefscodex.git
+   cd sheriefscodex
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables**
+
+   Create a `.env.local` file in the project root:
+
+   ```env
+   VITE_SUPABASE_URL=https://your-project.supabase.co
+   VITE_SUPABASE_ANON_KEY=your-anon-key
+   ```
+
+4. **Set up Supabase**
+
+   Run this SQL in the Supabase SQL Editor:
+
+   ```sql
+   CREATE TABLE projects (
+     id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+     title           TEXT NOT NULL DEFAULT '',
+     slug            TEXT NOT NULL DEFAULT '',
+     description     TEXT NOT NULL DEFAULT '',
+     tags            TEXT[] NOT NULL DEFAULT '{}',
+     thumbnail       TEXT NOT NULL DEFAULT '',
+     featured        BOOLEAN NOT NULL DEFAULT FALSE,
+     content_blocks  JSONB NOT NULL DEFAULT '[]',
+     created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+     updated_at      TIMESTAMPTZ NOT NULL DEFAULT now()
+   );
+
+   ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
+
+   CREATE POLICY "Anyone can read projects" ON projects
+     FOR SELECT USING (true);
+
+   CREATE POLICY "Authenticated users can insert" ON projects
+     FOR INSERT TO authenticated WITH CHECK (true);
+
+   CREATE POLICY "Authenticated users can update" ON projects
+     FOR UPDATE TO authenticated USING (true) WITH CHECK (true);
+
+   CREATE POLICY "Authenticated users can delete" ON projects
+     FOR DELETE TO authenticated USING (true);
+   ```
+
+   Then create a **public** storage bucket called `project-images`.
+
+5. **Create an admin user**
+
+   Go to Supabase → Authentication → Users → Add User (email + password).
+
+6. **Start the dev server**
+   ```bash
+   npm run dev
+   ```
+
+## 📁 Project Structure
+
+```
+src/
+├── components/          # Reusable UI components
+│   ├── admin/           # Admin-specific components (AdminGuard)
+│   ├── CodeBlock.tsx     # Syntax-highlighted code renderer
+│   ├── ContentRenderer.tsx
+│   ├── Navbar.tsx
+│   ├── Footer.tsx
+│   └── ProjectCard.tsx
+├── data/                # Data layer
+│   ├── supabaseClient.ts # Supabase client singleton
+│   ├── projectStore.ts   # CRUD operations + image upload
+│   ├── authStore.ts      # Authentication functions
+│   └── types.ts          # TypeScript interfaces
+├── pages/               # Route pages
+│   ├── admin/            # Admin pages (Dashboard, Editor, Login)
+│   ├── LandingPage.tsx
+│   ├── ProjectsPage.tsx
+│   ├── ProjectDetailPage.tsx
+│   └── AboutPage.tsx
+├── App.tsx              # Router configuration
+├── App.css              # Design system + all styles
+└── index.css            # CSS reset + variables
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📝 License
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+This project is open source and available under the [MIT License](LICENSE).
