@@ -26,7 +26,7 @@ export default function Navbar() {
       <div className="container navbar__inner">
         <Link to="/" className="navbar__logo">
           <span className="navbar__logo-icon">⟨/⟩</span>
-          <span>Sherief's Dev Codex</span>
+          <span>Sherief's Codex</span>
         </Link>
 
         <button
