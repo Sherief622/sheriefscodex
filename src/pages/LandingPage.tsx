@@ -39,7 +39,7 @@ export default function LandingPage() {
           </h1>
           <p className="hero__description animate-fade-in-up stagger-2">
             Software engineer passionate about machine learning, distributed
-            systems, and crafting elegant solutions to complex problems. Explore
+            systems, and crafting solutions to complex problems. Explore
             my work below.
           </p>
           <div className="hero__cta animate-fade-in-up stagger-3">
