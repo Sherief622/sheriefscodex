@@ -2,7 +2,7 @@
 
 A modern, dark-mode portfolio website for showcasing software engineering projects. Built with React, TypeScript, and Supabase — featuring an on-site admin interface for managing projects with rich content blocks.
 
-## ✨ Features
+## Features
 
 ### Public Pages
 
@@ -24,12 +24,12 @@ A modern, dark-mode portfolio website for showcasing software engineering projec
 
 ### Technical Highlights
 
-- 🔐 **Supabase Auth** — Secure admin authentication with Row Level Security
-- 🗄️ **Supabase Database** — PostgreSQL with public read / authenticated write policies
-- 🖼️ **Supabase Storage** — Persistent image hosting with public URLs
-- 🌐 **Universal Persistence** — Projects and images visible to all visitors across all browsers
-- ⚡ **Vite** — Fast dev server with HMR and optimized production builds
-- 🎨 **Dark-mode Glassmorphism** — Custom CSS design system with smooth animations
+- **Supabase Auth** — Secure admin authentication with Row Level Security
+- **Supabase Database** — PostgreSQL with public read / authenticated write policies
+- **Supabase Storage** — Persistent image hosting with public URLs
+- **Universal Persistence** — Projects and images visible to all visitors across all browsers
+- **Vite** — Fast dev server with HMR and optimized production builds
+- **Dark-mode Glassmorphism** — Custom CSS design system with smooth animations
 
 ## 🛠️ Tech Stack
 
@@ -125,29 +125,25 @@ A modern, dark-mode portfolio website for showcasing software engineering projec
 
 ```
 src/
-├── components/          # Reusable UI components
-│   ├── admin/           # Admin-specific components (AdminGuard)
-│   ├── CodeBlock.tsx     # Syntax-highlighted code renderer
+├── components/          #Reusable UI components
+│   ├── admin/           #Admin specific components (AdminGuard)
+│   ├── CodeBlock.tsx     #Syntax highlighted code renderer
 │   ├── ContentRenderer.tsx
 │   ├── Navbar.tsx
 │   ├── Footer.tsx
 │   └── ProjectCard.tsx
-├── data/                # Data layer
-│   ├── supabaseClient.ts # Supabase client singleton
-│   ├── projectStore.ts   # CRUD operations + image upload
-│   ├── authStore.ts      # Authentication functions
-│   └── types.ts          # TypeScript interfaces
-├── pages/               # Route pages
-│   ├── admin/            # Admin pages (Dashboard, Editor, Login)
+├── data/                #Data layer
+│   ├── supabaseClient.ts #Supabase client singleton
+│   ├── projectStore.ts   #CRUD operations + image upload
+│   ├── authStore.ts      #Authentication functions
+│   └── types.ts          #TypeScript interfaces
+├── pages/               #Route pages
+│   ├── admin/            #Admin pages (Dashboard, Editor, Login)
 │   ├── LandingPage.tsx
 │   ├── ProjectsPage.tsx
 │   ├── ProjectDetailPage.tsx
 │   └── AboutPage.tsx
-├── App.tsx              # Router configuration
-├── App.css              # Design system + all styles
-└── index.css            # CSS reset + variables
+├── App.tsx              #Router configuration
+├── App.css              #Design system + all styles
+└── index.css            #CSS reset + variables
 ```
-
-## 📝 License
-
-This project is open source and available under the [MIT License](LICENSE).
